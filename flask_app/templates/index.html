@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We' crossorigin='anonymous'>
+    <title>PyPie Derby</title>
+</head>
+<body>
+    <div class="flex-container justify-content-center mx-auto mt-2">
+        <form action="/register" method='POST' class="card col-4 mx-auto bg-secondary text-white p-3">
+            <h2>Register</h2>
+            {% with messages = get_flashed_messages(category_filter=['regError']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-info">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="formGroup">
+                <label for="first_name">First Name: </label>
+                <input class=formInput type="text" name="first_name">
+            </div>
+            <div class="formGroup">
+                <label for="last_name">Last Name: </label>
+                <input class=formInput type="text" name="last_name">
+            </div>
+            <div class="formGroup">
+                <label for="email">Email: </label>
+                <input class=formInput type="text" name="email">
+            </div>
+            <div class="formGroup">
+                <label>Password: </label>
+                <input class=formInput type="password" name="password">
+            </div>
+            <div class="formGroup">
+                <label>Confirm Password: </label>
+                <input class=formInput type="password" name="passConf">
+            </div>
+            <button class=formButton>Register</button>
+        </form>
+
+        <form action="/login" method="POST" class="card col-4 mx-auto bg-secondary text-white p-3 login">
+            <h2>Login</h2>
+            {% with messages = get_flashed_messages(category_filter=['logError']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-info">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="formGroup">
+                <label>Email: </label>
+                <input class=formInput type="text" name="email">
+            </div>
+            <div class="formGroup">
+                <label>Password: </label>
+                <input class=formInput type="password" name="password">
+            </div>
+            <button class=formButton>Login</button>
+        </form>
+    </div>
+</body>
+</html>

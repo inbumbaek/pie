@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>PyPie Derby</title>
+</head>
+<body>
+    <div class="main">
+        <div class="row">
+            <a href="/pies" class="btn">Pie Derby</a>
+            <a href="/logout" class="btn">Logout</a>
+        </div>
+        <div class="container">
+            <div class="flex-container">
+                <h1>PyPies by {{user.first_name}}</h1>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="table-secondary">
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pie in pies %}
+                    <tr>
+                        <td>{{ pie.name }}</td>
+                        <td>
+                            <a href="/pies/edit/{{ pie.id }}">Edit</a>
+                            <a href="/pies/destroy/{{ pie.id }}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container">
+            <div class="flex-container">
+                <h1>Add New PyPie</h1>
+                <form action="/create/pie" method="post" class="container">
+                    {% with messages = get_flashed_messages(category_filter=['pieError']) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input name="name" id="name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="filling">Filling:</label>
+                        <input name="filling" id="filling" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="crust">Crust:</label>
+                        <input name="crust" id="crust" type="text" class="form-control">
+                    </div>
+                    <input type="submit" value="Add Pie" class="btn">
+                </form>
+        </div>
+    </div>
+</body>
+</html>
